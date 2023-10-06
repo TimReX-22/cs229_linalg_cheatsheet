@@ -1,0 +1,209 @@
+% Farbe
+
+\def \customColor {PineGreen}
+
+% Bullet-Symbol für Aufzählungen
+\renewcommand\textbullet{\ensuremath{\bullet}}
+
+% Eingekreiste Nummern für Aufzählungen
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+        \node[shape=circle,draw,inner sep=1.2pt] (char) {#1};}}
+
+% Schriftart
+\renewcommand{\familydefault}{\sfdefault}
+
+%Tabelle Horiz. Grösse
+\renewcommand{\arraystretch}{1.5}
+
+%Einheiten
+\newcommand{\Einheit}[1]{
+$\bigl[ #1 \bigr]$
+}
+
+\newcommand{\EinheitBruch}[2]{
+$\bigl[ \frac{#1}{#2} \bigr]$
+}
+
+\newcommand{\Umbruch}{\vfill\null\columnbreak}
+
+% Titel-Block	
+\newcommand{\Header}[3]{
+	\begin{tcolorbox}  [arc = 0mm, 
+	                    colback = \customColor!50!black, 
+	                    colframe = \customColor!50!black, 
+	                    valign = center, 
+	                    fontupper=\color{white}]
+		\large \center \textbf{#1} \par
+		\huge \textbf{#2} \par 
+		\vskip 5pt 
+		\large #3 \par
+		\vskip 3pt 
+		\small Version: \today
+	\end{tcolorbox}
+	}
+
+%Teil-Block
+\newcommand{\Abschnitt}[1]{
+	\begin{tcolorbox} [arc = 0mm,
+						colback = \customColor!50!black,
+						colframe = \customColor,
+						valign = center,
+						before skip = 3mm,
+						leftright skip = -0.5mm,
+						after skip = 1 mm,
+						bottomrule = 0 mm,
+						toprule = 0 mm,
+						leftrule = 0 mm,
+						rightrule = 0 mm,
+						fontupper=\color{white}
+						]
+		\centering\Large\textbf{#1}
+	\end{tcolorbox}
+}
+
+% Überschrift
+\renewcommand{\section}[1]{
+	\begin{tcolorbox}[
+			arc=0mm,
+			colback=\customColor!50!black,
+			colframe=white,
+			bottomrule = 0 mm,
+			toprule = 0 mm,
+			leftrule = 0 mm,
+			rightrule = 0 mm,
+			valign=center,
+			left=0.5mm,
+			top= 0.7 mm,
+			bottom= 0.7 mm,
+			fontupper=\color{white},
+			before skip = 1mm,
+			leftright skip = -0.5mm,
+			after skip = 1 mm]
+
+		\textbf{#1}
+	\end{tcolorbox}
+	}
+
+% Abschnitt	
+\renewcommand{\subsection}[1]{
+\begin{tcolorbox}[
+            		arc=0mm,
+            		colback=\customColor!50,
+            		colframe=white,
+            		bottomrule = 0 mm,
+            		toprule = 0 mm,
+            		leftrule = 0 mm,
+            		rightrule = 0 mm,
+            		valign=center,
+            		left=0.5mm,
+            		top=0.2mm,
+            		bottom=0.2mm,
+            		before skip = 1mm,
+            		leftright skip = -0.5mm,
+            		after skip = 1mm]
+	\small \textbf{#1}
+\end{tcolorbox}
+}
+
+\renewcommand{\subsubsection}[2]{
+\begin{tcolorbox}[
+            		arc=0mm,
+            		colback=gray!50,
+            		colframe=white,
+            		bottomrule = 0 mm,
+            		toprule = 0 mm,
+            		leftrule = 0 mm,
+            		rightrule = 0 mm,
+            		valign=center,
+            		left=0.5mm,
+            		top=0.2mm,
+            		bottom=0.2mm,
+            		before skip = 1mm,
+            		leftright skip = -0.5mm,
+            		after skip = 1mm]
+	\small #1 \hfill #2
+\end{tcolorbox}
+}
+
+%MATH-BOX, optional commands in {}
+\newtcbox{\mathbox}[1][]{%
+    nobeforeafter, 
+    tcbox raise base, 
+    colframe=blue!30!black,
+    colback=blue!20, 
+    boxrule=1pt,
+    arc=1mm,
+    before skip = 0mm,
+    right = 1mm,
+    left=1mm,
+	top=0.5mm,
+	bottom=0.5mm,
+    #1}
+    
+\newtcbox{\mathboxnoback}[1][]{%
+    nobeforeafter, 
+    tcbox raise base, 
+    colframe=black,
+    colback=white,
+    boxrule=1pt,
+    arc=1mm,
+    before skip = 0mm,
+    right = 1mm,
+    left=1mm,
+	top=0.5mm,
+	bottom=0.5mm,
+    #1}
+    
+\newcommand{\textbox}[1]{
+\tcbox[
+		arc=1mm,
+		colback=blue!20,
+		colframe=blue!30!black,
+		arc=1mm,
+		boxrule=1pt,
+		right = 1mm,
+        left=1mm,
+	    top=0.5mm,
+	    bottom=0.5mm,
+		before skip = 1mm,
+		after skip = 2 mm
+		]
+{    
+	#1
+}
+}
+
+\newcommand{\textboxmithead}[2]{
+\begin{tcolorbox}[
+		arc=1mm,
+		colback=blue!20,
+		colframe=blue!30!black,
+		arc=1mm,
+		boxrule=1pt,
+		left=1mm,
+		top= 1 mm,
+		bottom= 1 mm,
+		before skip = 2mm,
+		leftright skip = 8mm,
+		after skip = 2 mm
+		]
+    \centering{\textbf{#1}\par}
+	#2
+\end{tcolorbox}
+}
+
+\newtcolorbox{titlebox}[1][]{
+        fonttitle=\bfseries, 
+        colbacktitle=gray!80,
+        enhanced,
+        attach boxed title to top center={yshift=-2mm},
+        colframe=black,
+        colback=white,
+        boxrule=1pt,
+        arc=1mm,
+        before skip = 2mm,
+        right = 1mm,
+        left=1mm,
+    	top=0.5mm,
+    	bottom=0.5mm,
+        title=#1}
