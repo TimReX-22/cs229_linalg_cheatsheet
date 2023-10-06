@@ -219,11 +219,20 @@ eig(A^{-1} &= eig(A)^{-1} \nonumber
 $$
 	P( X{=}x  | Y {=} y) = \frac{P(Y{=}y | X{=}x) P(X{=}x)}{P(Y{=}y)}
 $$
+\subsection{Expectation Value}
 
-\subsection{Conditional Expectation}
+\begin{align*}
+	\operatorname{E}[X] \,= \sum_i x_i p_i \text{ or } \operatorname{E}[X]\equiv\int_\Omega X\,d\operatorname{P}=\int_{\mathbb{R}}xf(x)\,dx
+\end{align*}
+
+\subsubsection{Conditional Expectation}{}
 \begin{align*}
 	\operatorname{E} (X \mid Y=y) =  \sum_x x P(X = x \mid Y = y) \\
 	= \sum_x x \frac{P(X = x, Y = y)}{P(Y=y)}
+\end{align*}
+\subsection{Variance}
+\begin{align*}
+	Var(X) = \operatorname{E}[\left(X-\mu\right)^2] = \operatorname{E}[X^2] - \operatorname{E}[X]^2
 \end{align*}
 \subsection{Exponential Family}
 A single-parameter exponential family is a set of probability distributions 
