@@ -489,6 +489,82 @@
 		\item For the Bernoulli family: logistic function
 	\end{itemize}
 
+	\section{Probability Distributions}
+
+	\subsection{Discrete Distributions}
+
+	\subsubsection{Bernoulli Distribution}{}
+	\paragraph{PMF:}
+	$$
+		P(X = x) = p^x (1-p)^{1-x} \quad \text{for } x \in \{0,1\}
+	$$
+	\paragraph{Mean and Variance:}
+	$$
+		\mu = p, \quad \sigma^2 = p(1 - p)
+	$$
+
+	\subsubsection{Binomial Distribution}{}
+	\paragraph{PMF:}
+	$$
+		P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+	$$
+	\paragraph{Mean and Variance:}
+	$$
+		\mu = np, \quad \sigma^2 = np(1 - p)
+	$$
+
+	\subsubsection{Poisson Distribution}{}
+	\paragraph{PMF:}
+	$$
+		P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}
+	$$
+	\paragraph{Mean and Variance:}
+	$$
+		\mu = \sigma^2 = \lambda
+	$$
+
+	\subsubsection{Geometric Distribution}{}
+	\paragraph{PMF:}
+	$$
+		P(X = k) = (1-p)^{k-1} p
+	$$
+	\paragraph{Mean and Variance:}
+	$$
+		\mu = \frac{1}{p}, \quad \sigma^2 = \frac{1 - p}{p^2}
+	$$
+
+	\subsection{Continuous Distributions}
+
+	\subsubsection{Exponential Distribution}{}
+	\paragraph{PDF:}
+	$$
+		f(x) = \lambda e^{-\lambda x}, \quad x \geq 0
+	$$
+	\paragraph{Mean and Variance:}
+	$$
+		\mu = \frac{1}{\lambda}, \quad \sigma^2 = \frac{1}{\lambda^2}
+	$$
+
+	\subsubsection{Uniform Distribution}{}
+	\paragraph{PDF:}
+	$$
+		f(x) = \frac{1}{b - a} \quad \text{for } a \leq x \leq b
+	$$
+	\paragraph{Mean and Variance:}
+	$$
+		\mu = \frac{a + b}{2}, \quad \sigma^2 = \frac{(b - a)^2}{12}
+	$$
+
+	\subsubsection{Beta Distribution}{}
+	\paragraph{PDF:}
+	$$
+		f(x; \alpha, \beta) = \frac{x^{\alpha - 1} (1 - x)^{\beta - 1}}{\mathrm{B}(\alpha, \beta)}
+	$$
+	\paragraph{Mean and Variance:}
+	$$
+		\mu = \frac{\alpha}{\alpha + \beta}, \quad \sigma^2 = \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}
+	$$
+
 	\section{Gaussian Distributions}
 	\subsection{Univariate Gaussian}
 	The probability density of a univariate Gaussian distribution is given by:
