@@ -495,9 +495,14 @@
 
 	\subsubsection{Bernoulli Distribution}{}
 	\paragraph{PMF:}
-	$$
-		P(X = x) = p^x (1-p)^{1-x} \quad \text{for } x \in \{0,1\}
-	$$
+	\begin{align*}
+		P(y;\phi) = \begin{cases}
+			\phi     & y = 1 \\
+			1 - \phi & y = 0
+		\end{cases} \\
+		P(y;\phi) = \phi^y (1-\phi)^{1-y} \quad \text{for } y \in \{0,1\}
+	\end{align*}
+
 	\paragraph{Mean and Variance:}
 	$$
 		\mu = p, \quad \sigma^2 = p(1 - p)
@@ -511,6 +516,21 @@
 	\paragraph{Mean and Variance:}
 	$$
 		\mu = np, \quad \sigma^2 = np(1 - p)
+	$$
+
+	\subsubsection{Multinomial Distribution}{}
+	\paragraph{PMF:}
+	$$
+		P(\mathbf{X} = \mathbf{x}) = \frac{n!}{x_1! x_2! \cdots x_k!} p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
+	$$
+	\paragraph{Mean and Variance:}
+	For each category $i$,
+	$$
+		\mu_i = np_i, \quad \sigma^2_i = np_i(1 - p_i)
+	$$
+	Covariance for categories $i$ and $j$,
+	$$
+		\mathrm{Cov}(X_i, X_j) = -np_i p_j \quad (i \neq j)
 	$$
 
 	\subsubsection{Poisson Distribution}{}
@@ -565,6 +585,29 @@
 		\mu = \frac{\alpha}{\alpha + \beta}, \quad \sigma^2 = \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}
 	$$
 
+	\subsubsection{Gamma Distribution}{}
+	\paragraph{PDF:}
+	$$
+		f(x; \alpha, \beta) = \frac{\beta^\alpha x^{\alpha - 1} e^{-\beta x}}{\Gamma(\alpha)} \quad \text{for } x > 0
+	$$
+	\paragraph{Mean and Variance:}
+	$$
+		\mu = \frac{\alpha}{\beta}, \quad \sigma^2 = \frac{\alpha}{\beta^2}
+	$$
+
+	\subsubsection{Dirichlet Distribution}{}
+	\paragraph{PDF:}
+	$$
+		f(\mathbf{x}; \boldsymbol{\alpha}) = \frac{1}{\mathrm{B}(\boldsymbol{\alpha})} \prod_{i=1}^{K} x_i^{\alpha_i - 1}
+	$$
+	Where $\mathrm{B}(\boldsymbol{\alpha})$ is the multivariate beta function.
+	\paragraph{Mean and Variance:}
+	For each component $i$,
+	$$
+		\mu_i = \frac{\alpha_i}{\sum_{j=1}^K \alpha_j}
+	$$
+
+
 	\section{Gaussian Distributions}
 	\subsection{Univariate Gaussian}
 	The probability density of a univariate Gaussian distribution is given by:
@@ -574,15 +617,23 @@
 	Where $\mu$ is the mean and $\sigma^2$ is the variance.
 
 	\subsection{Multivariate Gaussian}
-	The probability density of a multivariate Gaussian distribution is:
-	$$
-		\mathcal{N}(\mathbf{x} | \boldsymbol{\mu}, \Sigma) = \frac{1}{\sqrt{(2\pi)^k |\Sigma|}} \exp\left( -\frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu}) \right)
-	$$
-	Where $\boldsymbol{\mu}$ is the mean vector, $\Sigma$ is the covariance matrix, and $k$ is the number of dimensions.
+	The probability density of a multivariate Gaussian distribution in $d$ dimensions is:
+
+	\vskip5pt
+
+	\resizebox{\hsize}{!}{%
+		$
+			\mathcal{N}(\mathbf{x} | \boldsymbol{\mu}, \Sigma) = \frac{1}{\sqrt{(2\pi)^k |\Sigma|}} \exp\left( -\frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu}) \right)
+		$
+	}
+	\vskip5pt
+
+	Where $\boldsymbol{\mu}\in\mathbb{R}^d$ is the mean vector, $\Sigma\in\mathbb{R}^{d\times d}$ is the covariance matrix.
+
 	\subsubsection{Mean Vector and Covariance Matrix}{}
 	\begin{itemize}
 		\item The mean vector \(\boldsymbol{\mu}\) represents the mean of each dimension. If \(\mathbf{x}\) is an \(n\)-dimensional random vector, then \(\boldsymbol{\mu}\) is given by \(\boldsymbol{\mu} = \operatorname{E}[\mathbf{x}]\).
-		\item The covariance matrix \(\Sigma\) represents how each pair of dimensions of the random vector \(\mathbf{x}\) co-varies. If \(\mathbf{x}\) has dimensions \(x_1, x_2, ..., x_n\), then the element \(\Sigma_{ij}\) of the matrix \(\Sigma\) is the covariance between \(x_i\) and \(x_j\): \(\Sigma_{ij} = \operatorname{Cov}(x_i, x_j)\).
+		\item The covariance matrix \(\Sigma\) is symmetric and positive semi-definite. It represents how each pair of dimensions of the random vector \(\mathbf{x}\) co-varies. If \(\mathbf{x}\) has dimensions \(x_1, x_2, ..., x_n\), then the element \(\Sigma_{ij}\) of the matrix \(\Sigma\) is the covariance between \(x_i\) and \(x_j\): \(\Sigma_{ij} = \operatorname{Cov}(x_i, x_j)\).
 		\item The determinant of \(\Sigma\) (denoted as \(|\Sigma|\)) and its inverse \(\Sigma^{-1}\) play a key role in defining the shape and orientation of the multivariate Gaussian distribution in its multi-dimensional space.
 	\end{itemize}
 
