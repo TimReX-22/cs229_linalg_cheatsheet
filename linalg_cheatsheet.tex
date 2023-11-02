@@ -218,16 +218,16 @@
 		\includegraphics[width = 0.8 \columnwidth]{0_images/Blocksatz.pdf}
 	\end{center}
 
-	\section{Positive (Semi-)Definite Matrices}
-	\subsection{Definitions}
+	\subsection{Positive (Semi-)Definite Matrices}
+	\subsubsection{Definitions}{}
 	A symmetric matrix \( A \in \mathbb{R}^{n \times n} \) is called:
-	\begin{itemize}
+	\begin{itemize}[itemsep=0pt]
 		\item \textbf{Positive Semi-Definite (PSD)} if for any non-zero vector \( \mathbf{x} \in \mathbb{R}^n \), we have \( \mathbf{x}^T A \mathbf{x} \geq 0 \).
 		\item \textbf{Positive Definite (PD)} if for any non-zero vector \( \mathbf{x} \in \mathbb{R}^n \), \( \mathbf{x}^T A \mathbf{x} > 0 \).
 	\end{itemize}
 
-	\subsection{Properties}
-	\begin{itemize}
+	\subsubsection{Properties}{}
+	\begin{itemize}[itemsep=0pt]
 		\item All eigenvalues of a PSD matrix are non-negative, and those of a PD matrix are positive.
 		\item A matrix is PSD if and only if it can be written as \( B^T B \), where \( B \) is any matrix.
 		\item If \( A \) is PD (or PSD), then so is \( A^{-1} \) (if \( A \) is invertible).
@@ -235,10 +235,10 @@
 		\item The sum of two PSD matrices is also PSD.
 	\end{itemize}
 
-	\subsection{Checking for Positive (Semi-) Definiteness}
+	\subsubsection{Checking for Positive (Semi-) Definiteness}{}
 	Determining if a matrix is PSD or PD can be done in several ways:
 
-	\begin{itemize}
+	\begin{itemize}[itemsep=0pt]
 		\item \textbf{Eigenvalue Criterion:} A symmetric matrix is PSD if and only if all its eigenvalues are non-negative. It is PD if all eigenvalues are positive.
 		\item \textbf{Principal Minors:} A symmetric matrix \( A \) is PD if all its leading principal minors (determinants of the top-left \( k \times k \) submatrix, \( 1 \leq k \leq n \)) are positive. For PSD, all leading principal minors should be non-negative.
 		\item \textbf{Cholesky Decomposition:} A matrix is PD if and only if it has a Cholesky decomposition. For numerical algorithms, attempting a Cholesky decomposition and checking for failure can be an effective way to test for positive definiteness.
@@ -468,29 +468,6 @@
 		                                                & = \sum_{i=1}^n \operatorname{Var}\left(X_i\right) + 2\hskip-10pt\sum_{1\le i<j\le n}\hskip-10pt\operatorname{Cov}\left(X_i, X_j\right)
 	\end{align*}
 
-	\subsection{Exponential Family}
-	A single-parameter exponential family is a set of probability distributions
-	whose probability density function (or probability mass function, for the case of a discrete distribution) can be expressed in the form
-	$$
-		p(y;\eta) = b(\eta)\,\exp\bigl[\,\eta^T \, T(y) - a(\eta)\,\bigr]
-	$$
-	\begin{itemize}[itemsep=0pt]
-		\item $\eta$: natural parameter
-		\item $T(y)$: sufficient statistic
-		\item $a(\eta)$: log partition function
-	\end{itemize}
-
-	\subsubsection{Canonical Response Funtion}{}
-	$$
-		g(\eta) = \operatorname{E}[T(y);\eta]
-	$$
-	\begin{itemize}[itemsep=0pt]
-		\item For the Gaussian family: identify function
-		\item For the Bernoulli family: logistic function
-	\end{itemize}
-
-	\Umbruch
-
 	\section{Probability Distributions}
 
 	\subsection{Discrete Distributions}
@@ -613,13 +590,32 @@
 	$$
 		\mu_i = \frac{\alpha_i}{\sum_{j=1}^K \alpha_j}
 	$$
+	\subsection{Exponential Family}
+	A single-parameter exponential family is a set of probability distributions
+	whose probability density function (or probability mass function, for the case of a discrete distribution) can be expressed in the form
+	$$
+		p(y;\eta) = b(\eta)\,\exp\bigl[\,\eta^T \, T(y) - a(\eta)\,\bigr]
+	$$
+	\begin{itemize}[itemsep=0pt]
+		\item $\eta$: natural parameter
+		\item $T(y)$: sufficient statistic
+		\item $a(\eta)$: log partition function
+	\end{itemize}
 
+	\subsubsection{Canonical Response Funtion}{}
+	$$
+		g(\eta) = \operatorname{E}[T(y);\eta]
+	$$
+	\begin{itemize}[itemsep=0pt]
+		\item For the Gaussian family: identify function
+		\item For the Bernoulli family: logistic function
+	\end{itemize}
 
 	\section{Gaussian Distributions}
 	\subsection{Univariate Gaussian}
 	The probability density of a univariate Gaussian distribution is given by:
 	$$
-		\mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right)
+		\mathcal{N}(x ; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right)
 	$$
 	Where $\mu$ is the mean and $\sigma^2$ is the variance.
 
@@ -630,7 +626,7 @@
 
 	\resizebox{\hsize}{!}{%
 		$
-			\mathcal{N}(\mathbf{x} | \boldsymbol{\mu}, \Sigma) = \frac{1}{\sqrt{(2\pi)^k |\Sigma|}} \exp\left( -\frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu}) \right)
+			\mathcal{N}(\mathbf{x} ;\boldsymbol{\mu}, \Sigma) = \frac{1}{\sqrt{(2\pi)^k |\Sigma|}} \exp\left( -\frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu}) \right)
 		$
 	}
 	\vskip5pt
@@ -644,8 +640,49 @@
 		\item The determinant of \(\Sigma\) (denoted as \(|\Sigma|\)) and its inverse \(\Sigma^{-1}\) play a key role in defining the shape and orientation of the multivariate Gaussian distribution in its multi-dimensional space.
 	\end{itemize}
 
-	\section{Multinomial Distribution}
-	The multinomial distribution is a generalization of the binomial distribution. It models the probabilities of the various outcomes of a categorical variable over $n$ trials.
+	\section{Maximum Likelihood Estimation (MLE)}
+
+	\subsection{Definition}
+	The likelihood function for a model parameter \(\theta\) given observations \(X = (x_1, x_2, ..., x_n)\) is defined as:
+	\[
+		\mathcal{L}(\theta | X) = P(X | \theta) = \prod_{i=1}^{n} P(x_i | \theta)
+	\]
+	where \(P(x_i | \theta)\) is the probability of observing \(x_i\) given the parameter \(\theta\).
+
+	\subsection{Estimation}
+	The MLE \(\hat{\theta}\) is the value of \(\theta\) that maximizes \(\mathcal{L}(\theta | X)\). In practice, it's often more convenient to maximize the log-likelihood because the logarithm is a strictly increasing function and transforms the product into a sum, simplifying the differentiation:
+	\[
+		\ell(\theta | X) = \log \mathcal{L}(\theta | X) = \sum_{i=1}^{n} \log P(x_i | \theta)
+	\]
+
+	\subsection{Finding the MLE}
+	To find the MLE, we take the derivative of \(\ell(\theta | X)\) with respect to \(\theta\) and set it to zero (for parameter \(\theta\) where this is possible):
+	\[
+		\frac{\partial}{\partial \theta} \ell(\theta | X) = 0
+	\]
+	Solving this equation gives us the MLE \(\hat{\theta}\). In cases where the derivative does not exist or the equation is hard to solve, numerical methods such as gradient descent can be used.
+
+	\subsection{Properties of MLE}
+	\begin{itemize}[itemsep=0pt]
+		\item \textbf{Consistency:} As the number of observations \(n\) approaches infinity, the MLE converges in probability to the true value of \(\theta\).
+		\item \textbf{Asymptotic normality:} Under regular conditions, as \(n\) increases, the distribution of \(\hat{\theta}\) approaches a normal distribution centered around the true \(\theta\), with a variance that can be estimated from the data.
+		\item \textbf{Invariance:} If \(\hat{\theta}\) is the MLE of \(\theta\), and \(g\) is a function, then the MLE of \(g(\theta)\) is \(g(\hat{\theta})\).
+		\item \textbf{Efficiency:} Under certain conditions, MLE achieves the Cramér-Rao lower bound, making it the most efficient unbiased estimator.
+	\end{itemize}
+
+	\subsection{Examples}
+	\subsubsection{MLE for Normal Distribution}{}
+	Consider a dataset \( X = \{ x_1, x_2, \ldots, x_n \} \) assumed to be drawn from a normal distribution \(\mathcal{N}(\mu, \sigma^2)\). The MLE for \(\mu\) and \(\sigma^2\) are given by:
+	\[
+		\hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i, \quad \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n} (x_i - \hat{\mu})^2
+	\]
+
+	\subsubsection{MLE for a Binomial Distribution}{}
+	For a binomial distribution \(B(n, p)\) with known \(n\) and unknown \(p\), given \(k\) successes in \(n\) trials, the MLE of \(p\) is:
+	\[
+		\hat{p} = \frac{k}{n}
+	\]
+
 
 	\section{Optimization Methods in Machine Learning}
 
@@ -796,7 +833,7 @@
 		\includegraphics[width = 0.8\linewidth]{0_images/high_bias.png}
 	\end{center}
 
-	\section{Variance}
+	\subsection{Variance}
 	When fitting a complex model, there is a large risk that we are fitting patterns in the data that happened to be present in our small, finite training set, but that do not reflect the wider pattern of the relationship between $x$ and $y$.
 
 	“Spurious” patterns in the training
@@ -811,6 +848,64 @@
 	\begin{center}
 		\includegraphics[width = 0.8\linewidth]{0_images/bias_variance_tradeoff.png}
 	\end{center}
+	\begin{itemize}
+		\item More Training samples: Bias ?, Variance $\downarrow$
+		\item Less Training samples: Bias ?, Variance $\uparrow^\star$
+		\item Smaller set of features: Bias $\uparrow$, Variance $\downarrow$
+		\item Larger Set of features: Bias $\downarrow$, Variance $\uparrow$
+		\item Try email header features: Bias $\downarrow$, Variance $\uparrow$
+		\item Replace the value of your last feature by a random number: Bias $\uparrow^{\star\star}$, Variance $\uparrow$
+		\item Stopping Optimization early: Bias $\uparrow$, Variance $\downarrow$
+	\end{itemize}
+	$\star$:\textit{A specific classifier (with a fixed model complexity) will be more likely to overfit to noise in the training
+		data when there is less training data, and is therefore more likely to overfit.}
+
+	$\star\star$: \textit{Bias should increase as you are replacing information that could be useful for your
+		prediction with a meaningless feature.}
+
+	\section{Kernels}
+
+	\textbf{Kernelizing:}
+
+	\begin{align*}
+		\text{step 1: } c^{[i](t+1)}  & = \arg\min_j \lVert x^{(t)} - \mu_j \rVert^2                                     \\
+		\text{step 2: } \mu_j^{(t+1)} & = \frac{\sum_{i=1}^m 1\{c^{(t+1)} = j\}x^{(i)}}{\sum_{i=1}^m 1\{c^{(t+1)} = j\}}
+	\end{align*}
+
+
+	\textbf{Answer:}
+
+	Given the formula for $c^{(t+1)}$, we want to express the distance in the feature space:
+
+	\begin{align*}
+		c^{[i](t+1)} & = \arg\min_j \lVert \phi(x^{(i)}) - \mu_j \rVert^2 \\
+		             & \text{(def. of distance in feature space)}
+	\end{align*}
+
+	Expanding the squared norm, we get:
+
+	\begin{align*}
+		 & = \arg\min_j \langle \phi(x^{(i)}), \phi(x^{(i)}) \rangle + \langle \mu_j, \mu_j \rangle - 2\langle \phi(x^{(i)}), \mu_j \rangle \\
+	\end{align*}
+
+	Using the definition of the mean $\mu_j$ and the given update rules, we can expand:
+
+	\begin{align*}
+		 & = \arg\min_j \langle \phi(x^{(i)}), \phi(x^{(i)}) \rangle                        \\
+		 & - 2\phi(x^{(i)})^T \left( \frac{1}{|S_j|} \sum_{l \in S_j} \phi(x^{(l)}) \right) \\
+		 & \quad \text{(where $S_j = \{ l : c^{(l)} = j \}$)}
+	\end{align*}
+
+	Now, to simplify calculations in the feature space, we use a kernel function, $K(u,v) = \langle \phi(u), \phi(v) \rangle$.
+
+	\begin{align*}
+		 & = \arg\min_j K(x^{(i)}, x^{(i)})                                       \\
+		 & - 2\left( \frac{1}{|S_j|} \sum_{l \in S_j} K(x^{(t)}, x^{(l)}) \right) \\
+		 & + \frac{1}{|S_j|^2} \sum_{l,p \in S_j} K(x^{(l)}, x^{(p)})
+	\end{align*}
+
+	This provides a kernelized version of the update formula for $c^{(t+1)}$, where operations are defined in terms of the kernel function $K$, which implicitly computes inner products in the infinite-dimensional feature space.
+
 
 \end{multicols*}
 \end{document}
