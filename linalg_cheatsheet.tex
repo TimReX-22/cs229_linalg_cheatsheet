@@ -273,19 +273,19 @@
 
 	Gradient:
 	$$
-		\nabla f = \mathbf{A}^T
+		\nabla_x f = \mathbf{A}^T
 	$$
 
 	\subsubsection{\( f(\mathbf{x}) = \mathbf{x}^T\mathbf{A}\mathbf{x} \)\hfill $\mathbf{A}\in\mathbb{R}^{m\times n}$}{}
 
 	Gradient:
 	$$
-		\nabla f = (\mathbf{A} + \mathbf{A}^T)\mathbf{x}
+		\nabla_x f = (\mathbf{A} + \mathbf{A}^T)\mathbf{x} = 2\mathbf{Ax} \quad \text{ if sym.}
 	$$
 
 	Hessian:
 	$$
-		H(f) = \mathbf{A} + \mathbf{A}^T
+		H(f) = \mathbf{A} + \mathbf{A}^T = 2\mathbf{A}\quad \text{ if sym.}
 	$$
 
 	\subsubsection{Linear Regression Loss (\( \ell_2 \) \textbf{norm})}{}
@@ -489,11 +489,14 @@
 		\item For the Bernoulli family: logistic function
 	\end{itemize}
 
+	\Umbruch
+
 	\section{Probability Distributions}
 
 	\subsection{Discrete Distributions}
 
 	\subsubsection{Bernoulli Distribution}{}
+	One Trial, Two outcomes
 	\paragraph{PMF:}
 	\begin{align*}
 		P(y;\phi) = \begin{cases}
@@ -509,7 +512,10 @@
 	$$
 
 	\subsubsection{Binomial Distribution}{}
+	Distribution of the number of successes in a sequence of $n$ independent experiments, each with two outcomes, and each with its own Boolean-valued outcome: success (with probability $p$) or failure (with probability $q = 1 -p$)
+	$\rightarrow$ Multiple Trials, Two outcomes
 	\paragraph{PMF:}
+	The probability of getting exactly $k$ successes in $n$ independent Bernoulli trials (with the same rate $p$) is given by
 	$$
 		P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
 	$$
@@ -519,6 +525,7 @@
 	$$
 
 	\subsubsection{Multinomial Distribution}{}
+	Multiple Trials, Multiple outcomes
 	\paragraph{PMF:}
 	$$
 		P(\mathbf{X} = \mathbf{x}) = \frac{n!}{x_1! x_2! \cdots x_k!} p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
@@ -640,9 +647,143 @@
 	\section{Multinomial Distribution}
 	The multinomial distribution is a generalization of the binomial distribution. It models the probabilities of the various outcomes of a categorical variable over $n$ trials.
 
+	\section{Optimization Methods in Machine Learning}
 
+	\subsection{Newton's Method}
+	Given a twice-differentiable function \(f(\mathbf{x})\), Newton's method updates the parameter vector \(\mathbf{x}\) as follows:
+	\[
+		\mathbf{x}_{\text{new}} = \mathbf{x} - \left[\nabla^2 f(\mathbf{x})\right]^{-1} \nabla f(\mathbf{x})
+	\]
+	where \(\nabla f(\mathbf{x})\) and \(\nabla^2 f(\mathbf{x})\) are the gradient and Hessian matrix of \(f\) at \(\mathbf{x}\), respectively. Despite its quadratic convergence rate, Newton's method can be computationally expensive due to the need to compute and invert the Hessian matrix.
 
+	\subsection{Stochastic Gradient Descent (SGD)}
+	Stochastic Gradient Descent is a simplification of the traditional gradient descent algorithm. It updates the parameters using the gradient of the loss function with respect to a \textbf{single} data point (or a small subset) chosen randomly in each iteration. The update rule is:
+	\[
+		\mathbf{x}_{\text{new}} = \mathbf{x} - \eta \nabla f_i(\mathbf{x})
+	\]
+	where \(\eta\) is the learning rate, and \(\nabla f_i(\mathbf{x})\) is the gradient computed for the \(i\)th data point. While SGD can be noisy compared to full-batch gradient descent, it allows for more frequent updates, which can be beneficial for large datasets.
 
+	\subsection{Mini-Batch Gradient Descent}
+	Mini-Batch Gradient Descent is a variation of SGD where instead of using a single sample at each iteration, a mini-batch of samples is used. This method aims to balance the efficiency of using batches with the reduced variance of the gradient estimate. The update rule for a mini-batch is:
+	\[
+		\mathbf{x}_{\text{new}} = \mathbf{x} - \eta \nabla f_{\mathbf{B}}(\mathbf{x})
+	\]
+	where \(\mathbf{B}\) represents a mini-batch of samples and \(\nabla f_{\mathbf{B}}(\mathbf{x})\) is the gradient of the loss function averaged over all samples in the mini-batch.
 
+	\subsection{Normal Equation for Linear Least Squares}
+	The Normal Equation is a method to analytically solve the linear least squares problem for finding the best-fitting parameters in a linear regression model. Given a design matrix \(\mathbf{X}\) and a target vector \(\mathbf{y}\), the optimal parameter vector \(\mathbf{w}\) is given by:
+	\[
+		\mathbf{w} = \left(\mathbf{X}^\top \mathbf{X}\right)^{-1} \mathbf{X}^\top \mathbf{y}
+	\]
+	This equation directly computes the parameters that minimize the squared difference between the predictions and the actual values. It's computationally efficient for small to moderate-sized datasets but can be computationally expensive or numerically unstable for very large datasets.
+
+	\section{Important Theorems}
+
+	\subsection{Jensen's Inequality}
+
+	Let $X$ be an integrable real-valued random variable and $\phi$ a convex function. Then:
+
+	$$\varphi\left(\operatorname{E}[X]\right) \leq \operatorname{E} \left[ \varphi(X) \right]$$
+	\begin{center}
+		\includegraphics[width=0.8\linewidth]{0_images/jensen.png}
+	\end{center}
+
+	\subsection{Concavity}
+	A real-valued function $f$	 on an interval (or, more generally, a convex set in vector space) is said to be concave if, for any $x$ and $y$ in the interval and for any $\alpha\in[0,1]$:
+	\begin{align*}
+		f((1-\alpha )x+\alpha y)\geq (1-\alpha ) f(x)+\alpha f(y)
+	\end{align*}
+
+	\section{Decision Trees}
+	\subsection{Feature Split selection}
+	Given a subset of data $M$ (node in a tree).
+	\begin{enumerate}[itemsep=0pt]
+		\item For each feature $h_i(x)$:
+		      \begin{enumerate}
+			      \item Split data of $M$ according to feature $h_i(x)$
+			      \item Compute misclassification error of split:
+			            \begin{align*}
+				            \frac{\# \ \text{mistakes}}{\#\ \text{datapoints}}
+			            \end{align*}
+		      \end{enumerate}
+		\item Choose feature $h^\star$ with lowest error
+	\end{enumerate}
+
+	\subsection{Threshold Split Selection}
+	\begin{enumerate}[itemsep=0pt]
+		\item Sort the values of a feature $h_j(x)$. Let $\{v_1, \dots, v_n\}$ denote sorted values.
+		\item For $i = 1\dots n-1$:
+		      \begin{enumerate}[itemsep=0pt]
+			      \item Consider split $t_i = \frac{v_i + v_[i+1]}{2}$
+			      \item Compute error for split $h_j(x)\geq t_i$
+		      \end{enumerate}
+		\item Choose $t^\star$ with lowest error
+	\end{enumerate}
+	Threshold split caveat: same feature can be used multiple times!
+
+	\subsection{Greedy Decision Tree Learning}
+	\begin{enumerate}[itemsep=0pt]
+		\item Start with empty tree
+		\item Select a feature to split on (see above)
+		\item For each split of tree:
+		      \begin{enumerate}[itemsep=0pt]
+			      \item If done, make predictions $\rightarrow$ Stopping Cond.
+			      \item Otherwise, go to step 2 and recurse on this split
+		      \end{enumerate}
+	\end{enumerate}
+
+	\subsubsection{Stopping Conditions}{}
+	\begin{itemize}[itemsep=0pt]
+		\item All data agrees on $y$
+		\item Already split on all features
+		\item NOT: Error does not decrease!
+	\end{itemize}
+
+	\subsection{Tree Pruning Algorithm}
+	Repeat for every split in Tree:
+	\begin{enumerate}[itemsep=0pt]
+		\item Compute total cost $C(T)$ of split using nr. of leaves $L(T)$:
+		      \begin{align*}
+			      C(T) = \text{Error}(T) + \lambda L(T)
+		      \end{align*}
+		\item Undo the split to get $T_{small}$ and calculate cost of smaller tree
+		\item Prune split if total cost is lower
+	\end{enumerate}
+	\section{Boosting}
+	Classification $y = \pm 1$ from input $x$. Ensemble model consists of classifiers $f_1(x), \dots, f_T(x)$ and coefficients $\hat{w}_1, \dots, \hat{w}_T$. Prediciton:
+	\begin{align}
+		\hat{y} = sign\left(\sum \hat{w}_t f_t(x)\right)
+	\end{align}
+	Boosting: focus learning on 'hard' points, using weighted data. Each $x_i, y_i$ weighted by $\alpha_i$. Loss function becomes:
+	\begin{align*}
+		\sum_{i=1}^{n}\alpha_i\ell(x_i, y_i; \theta)
+	\end{align*}
+	Gradient of loss will be multiplied by $\alpha_i$, in a decision tree a data point counts $\alpha_i$ times.
+	\subsection{AdaBoost Algorithm}
+	\begin{enumerate}[itemsep=0pt]
+		\item Start with $\alpha_i = \frac{1}{n}$ for all data points
+		\item For $t = 1,\dots, T$:
+		      \begin{enumerate}[itemsep=0pt, leftmargin=10pt]
+			      \item Learn $f_t(x)$ with data weights $\alpha_i$
+			      \item Compute coefficients $\hat{w}_t$ using:
+			            \begin{align*}
+				            \hat{w}_t               & = \frac{1}{2}\ln\left(\frac{1 - \text{weightederr}(f_t)}{\text{weightederr}(f_t)}\right) \\
+				            \text{weightederr}(f_t) & = \sum_{i = 1}^{n}\alpha_i 1\{f_t(x_i) \neq y_i\}
+			            \end{align*}
+			      \item Recompute weights $\alpha_i$ using:
+			            \begin{align*}
+				            \alpha_i := \begin{cases}
+					            \alpha_i\exp(-\hat{w}_t) & \text{ if } f_t(x_i) = y_i    \\
+					            \alpha_i\exp(\hat{w}_t)  & \text{ if } f_t(x_i) \neq y_i
+				            \end{cases}
+			            \end{align*}
+			            which decreases the weight for data points where the classifier got it right and increases the weights otherwise.
+			      \item Normalize weights
+			            \begin{align*}
+				            \alpha_i := \frac{\alpha_i}{\sum_{j}^{n}\alpha_j}
+			            \end{align*}
+		      \end{enumerate}
+	\end{enumerate}
+	Training error of Ensemble will go to zero (under some conditions).
 \end{multicols*}
 \end{document}
