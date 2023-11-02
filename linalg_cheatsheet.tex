@@ -785,5 +785,32 @@
 		      \end{enumerate}
 	\end{enumerate}
 	Training error of Ensemble will go to zero (under some conditions).
+
+	\section{Bias-Variance Tradeoff}
+	\subsection{Bias}
+
+	The bias of a model is defined to be the test error even
+	if we were to fit it to a very (say, infinitely) large training dataset. Thus, if a model suffers from large bias, it \textbf{underfits} (i.e., fails to
+	capture structure exhibited by).
+	\begin{center}
+		\includegraphics[width = 0.8\linewidth]{0_images/high_bias.png}
+	\end{center}
+
+	\section{Variance}
+	When fitting a complex model, there is a large risk that we are fitting patterns in the data that happened to be present in our small, finite training set, but that do not reflect the wider pattern of the relationship between $x$ and $y$.
+
+	“Spurious” patterns in the training
+	set are (mostly) due to the observation noise, and fitting these spurious patters results in a model with large test error.
+
+	\begin{center}
+		\includegraphics[width = 0.8\linewidth]{0_images/high_variance.png}
+	\end{center}
+
+	\subsection{Tradeoff}
+
+	\begin{center}
+		\includegraphics[width = 0.8\linewidth]{0_images/bias_variance_tradeoff.png}
+	\end{center}
+
 \end{multicols*}
 \end{document}
