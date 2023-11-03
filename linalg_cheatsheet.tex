@@ -649,6 +649,15 @@
 	\]
 	where \(P(x_i | \theta)\) is the probability of observing \(x_i\) given the parameter \(\theta\).
 
+	For Discriminative Algorithms:
+	\begin{align*}
+		\mathcal{L}(\theta) = \prod_{i=1}^{n} p(y^{(i)}\mid x^{(i)}; \theta)
+	\end{align*}
+
+	For Generative Algorithms:
+	\begin{align*}
+		\mathcal{L}(\theta) = \prod_{i=1}^{n} p(x^{(i)}\mid y^{(i)}; \theta)\cdot p(y^{(i)};\theta)
+	\end{align*}
 	\subsection{Estimation}
 	The MLE \(\hat{\theta}\) is the value of \(\theta\) that maximizes \(\mathcal{L}(\theta | X)\). In practice, it's often more convenient to maximize the log-likelihood because the logarithm is a strictly increasing function and transforms the product into a sum, simplifying the differentiation:
 	\[
